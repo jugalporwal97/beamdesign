@@ -30,6 +30,8 @@ function App() {
             setFy(parseInt(e.target.value));
           }}
         >
+          <option value="">Select</option>
+
           <option value="250">250</option>
           <option value="415">415</option>
           <option value="500">500</option>
@@ -44,6 +46,7 @@ function App() {
             setfck(parseInt(e.target.value));
           }}
         >
+           <option value="">Select</option>
           <option value="15">15</option>
           <option value="20">20</option>
           <option value="25">25</option>
@@ -168,6 +171,7 @@ function App() {
             setphibar(parseInt(e.target.value));
           }}
         >
+           <option value="">Select</option>
           <option value="6">6</option>
           <option value="8">8</option>
           <option value="10">10</option>
