@@ -269,7 +269,7 @@ function App() {
         <h4>Mu , lim = Limiting moment of resistance:</h4>
         <button
           onClick={() => {
-            varmulim = qlim * b * (edd * edd);
+            varmulim = (qlim * b * (edd * edd)) / 1000000;
             setMulim(varmulim);
           }}
         >
