@@ -33,6 +33,36 @@ function App() {
   const [layerb, setlayerb] = useState(0);
   const [layert, setlayert] = useState(0);
   const [phibartop, setphibartop] = useState(0);
+  const [hfcc, sethfcc] = useState(0);
+  const [hast2, sethast2] = useState(0);
+
+  const [hast, sethast] = useState(0);
+  const [hfast, sethfast] = useState(0);
+  const [hascreq, sethascreq] = useState(0);
+  const [diabar1, setdiabar1] = useState(0);
+  const [noOfbar1, setnoOfbar1] = useState(0);
+  const [ascprov, setascprov] = useState(0);
+
+  const [diabar2, setdiabar2] = useState(0);
+  const [noOfbar2, setnoOfbar2] = useState(0);
+  const [provtop2, setprovtop2] = useState(0);
+
+  const [diabar3, setdiabar3] = useState(0);
+  const [noOfbar3, setnoOfbar3] = useState(0);
+  const [provtop3, setprovtop3] = useState(0);
+
+  const [diabar4, setdiabar4] = useState(0);
+  const [noOfbar4, setnoOfbar4] = useState(0);
+  const [provtop4, setprovtop4] = useState(0);
+
+  const [diabar5, setdiabar5] = useState(0);
+  const [noOfbar5, setnoOfbar5] = useState(0);
+  const [provtop5, setprovtop5] = useState(0);
+
+  const [diabar6, setdiabar6] = useState(0);
+  const [noOfbar6, setnoOfbar6] = useState(0);
+  const [provtop6, setprovtop6] = useState(0);
+  const [astprov, setastprov] = useState(0);
 
   let astmax = 0;
 
@@ -353,23 +383,13 @@ function App() {
           </button>
           {hmu2 ? <h3>{hmu2}</h3> : null}
         </label>
-        <label style={{display: "flex", flexDirection: "row"}}>
-          <h4>Use 20 Q bar on top:</h4>
-
-          <input
-            onChange={(e) => {
-              setQbarontop(parseInt(e.target.value));
-            }}
-            placeholder="enter appropriate value: 450"
-          />
-        </label>
 
         <label style={{display: "flex", flexDirection: "row"}}>
           <h3>d' :</h3>
 
           <button
             onClick={() => {
-              ddash = bt + Qbarontop / 2;
+              ddash = layert === 1 ? bt + phibartop / 2 : bt + phibartop + phibartop / 2;
               setddash(ddash);
             }}
           >
@@ -379,25 +399,11 @@ function App() {
         </label>
 
         <label style={{display: "flex", flexDirection: "row"}}>
-          <h3>d = Doverall - d'</h3>
-
-          <button
-            onClick={() => {
-              d = doverall - hddash;
-              sethd(d);
-            }}
-          >
-            calculate
-          </button>
-          {hd ? <h3>{hd}</h3> : null}
-        </label>
-
-        <label style={{display: "flex", flexDirection: "row"}}>
           <h3>strain ESC = </h3>
 
           <button
             onClick={() => {
-              stainESC = 0.0035 * (1 - hddash / hd / xumaxd);
+              stainESC = 0.0035 * (1 - hddash / edd / xumaxd);
               setstainEsc(stainESC);
             }}
           >
@@ -473,6 +479,321 @@ function App() {
           calculate
         </button>
         {hstainESC ? <h3>{hstainESC}</h3> : null}
+      </label>
+
+      {/* {line 45 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3>calculate FCC: </h3>
+
+        <button
+          onClick={() => {
+            var fcc = hddash < (3 * xumaxd * edd) / 7 ? 0.446 * fck : 0;
+            sethfcc(fcc);
+          }}
+        >
+          calculate
+        </button>
+        {hfcc ? <h3>{hfcc}</h3> : null}
+      </label>
+      {/* line 46 */}
+
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3>calculate Asc: </h3>
+
+        <button
+          onClick={() => {
+            var asc = (mu2 * 1000000) / ((hfsc - hfcc) * (edd - hddash));
+            sethasc(asc);
+          }}
+        >
+          calculate
+        </button>
+        {hasc ? <h3>{hasc}</h3> : null}
+      </label>
+      {/* line 47 */}
+
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3>calculate Ast2: </h3>
+
+        <button
+          onClick={() => {
+            var temp = (hasc * (hfsc * hfcc)) / (0.87 * fy);
+            sethast2(temp);
+          }}
+        >
+          calculate
+        </button>
+        {hast2 ? <h3>{hast2}</h3> : null}
+      </label>
+      {/* line 48 */}
+
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3>Ast lim: </h3>
+
+        <button
+          onClick={() => {
+            var temp = (mulim * 1000000) / (0.87 * fy * (edd - 0.42 * xumaxd * edd));
+            sethastlim(temp);
+          }}
+        >
+          calculate
+        </button>
+        {hastlim ? <h3>{hastlim}</h3> : null}
+      </label>
+      {/* line 49 */}
+
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3>Ast : </h3>
+
+        <button
+          onClick={() => {
+            var temp = hastlim + hast2;
+            sethast(temp);
+          }}
+        >
+          calculate
+        </button>
+        {hast ? <h3>{hast}</h3> : null}
+      </label>
+      {/* line 50 */}
+
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3>Fial Ast required : </h3>
+
+        <button
+          onClick={() => {
+            var temp = mu < mulim ? hastrequired : hast;
+            sethfast(temp);
+          }}
+        >
+          calculate
+        </button>
+        {hfast ? <h3>{hfast}</h3> : null}
+      </label>
+
+      {/* line 51 */}
+
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> Asc required : </h3>
+
+        <button
+          onClick={() => {
+            var temp = mu < mulim ? 0 : hasc;
+            sethascreq(temp);
+          }}
+        >
+          calculate
+        </button>
+        {hascreq ? <h3>{hascreq}</h3> : null}
+      </label>
+
+      {/* line 52 */}
+      <h3>Provide Bottom</h3>
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h4>Dia of bar</h4>
+        <input
+          onChange={(e) => {
+            setdiabar1(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+        <h4>number of bar</h4>
+        <input
+          onChange={(e) => {
+            setnoOfbar1(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+      </label>
+      {/* line 53 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> Asc required : </h3>
+
+        <button
+          onClick={() => {
+            var temp = noOfbar1 * 3.14 * (diabar1 * diabar1);
+            setascprov(temp);
+          }}
+        >
+          calculate
+        </button>
+        {hascreq ? <h3>{hascreq}</h3> : null}
+      </label>
+
+      {/* line 52 */}
+      <h3>Provide top 1</h3>
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h4>Dia of bar</h4>
+        <input
+          onChange={(e) => {
+            setdiabar2(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+        <h4>number of bar</h4>
+        <input
+          onChange={(e) => {
+            setnoOfbar2(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+      </label>
+      {/* line 53 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> result : </h3>
+
+        <button
+          onClick={() => {
+            var temp = noOfbar2 * 3.14 * (diabar2 * diabar2);
+            setprovtop2(temp);
+          }}
+        >
+          calculate
+        </button>
+        {provtop2 ? <h3>{provtop2}</h3> : null}
+      </label>
+
+      <h3>Provide top 2</h3>
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h4>Dia of bar</h4>
+        <input
+          onChange={(e) => {
+            setdiabar3(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+        <h4>number of bar</h4>
+        <input
+          onChange={(e) => {
+            setnoOfbar3(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+      </label>
+      {/* line 53 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> result : </h3>
+
+        <button
+          onClick={() => {
+            var temp = noOfbar3 * 3.14 * (diabar3 * diabar3);
+            setprovtop3(temp);
+          }}
+        >
+          calculate
+        </button>
+        {provtop3 ? <h3>{provtop3}</h3> : null}
+      </label>
+
+      <h3>Provide top 3</h3>
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h4>Dia of bar</h4>
+        <input
+          onChange={(e) => {
+            setdiabar4(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+        <h4>number of bar</h4>
+        <input
+          onChange={(e) => {
+            setnoOfbar4(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+      </label>
+      {/* line 53 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> result : </h3>
+
+        <button
+          onClick={() => {
+            var temp = noOfbar4 * 3.14 * (diabar4 * diabar4);
+            setprovtop4(temp);
+          }}
+        >
+          calculate
+        </button>
+        {provtop4 ? <h3>{provtop4}</h3> : null}
+      </label>
+
+      <h3>Provide top 4</h3>
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h4>Dia of bar</h4>
+        <input
+          onChange={(e) => {
+            setdiabar5(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+        <h4>number of bar</h4>
+        <input
+          onChange={(e) => {
+            setnoOfbar5(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+      </label>
+      {/* line 53 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> result : </h3>
+
+        <button
+          onClick={() => {
+            var temp = noOfbar5 * 3.14 * (diabar5 * diabar5);
+            setprovtop5(temp);
+          }}
+        >
+          calculate
+        </button>
+        {provtop5 ? <h3>{provtop5}</h3> : null}
+      </label>
+
+      <h3>Provide top 5</h3>
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h4>Dia of bar</h4>
+        <input
+          onChange={(e) => {
+            setdiabar6(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+        <h4>number of bar</h4>
+        <input
+          onChange={(e) => {
+            setnoOfbar6(parseInt(e.target.value));
+          }}
+          placeholder="enter appropriate value:"
+        />
+      </label>
+      {/* line 53 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> Result : </h3>
+
+        <button
+          onClick={() => {
+            var temp = noOfbar6 * 3.14 * (diabar6 * diabar6);
+            setprovtop6(temp);
+          }}
+        >
+          calculate
+        </button>
+        {provtop6 ? <h3>{provtop6}</h3> : null}
+      </label>
+
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> Calculate Act Provided </h3>
+
+        <button
+          onClick={() => {
+            var temp = provtop6 + provtop5 + provtop4 + provtop3 + provtop2;
+
+            setastprov(temp);
+          }}
+        >
+          calculate
+        </button>
+        {astprov ? <h3>{astprov}</h3> : null}
       </label>
     </div>
   );
