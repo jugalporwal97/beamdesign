@@ -522,7 +522,7 @@ function App() {
 
         <button
           onClick={() => {
-            var temp = (hasc * (hfsc * hfcc)) / (0.87 * fy);
+            var temp = (hasc * (hfsc - hfcc)) / (0.87 * fy);
             sethast2(temp);
           }}
         >
