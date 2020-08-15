@@ -245,12 +245,28 @@ function App() {
           placeholder="enter appropriate value:"
         />
         <h4>diameter at bottom</h4>
-        <input
+
+        <select
           onChange={(e) => {
             setphibar(parseInt(e.target.value));
           }}
-          placeholder="enter appropriate value: 30"
-        />
+        >
+          <option value="">Select</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="25">25</option>
+          <option value="28">28</option>
+          <option value="32">32</option>
+          <option value="36">36</option>
+          <option value="40">40</option>
+        </select>
       </label>
       {/* line 14 */}
       <label style={{display: "flex", flexDirection: "row"}}>
@@ -262,12 +278,28 @@ function App() {
           placeholder="enter appropriate value:"
         />
         <h4>Diameter at Top</h4>
-        <input
+
+        <select
           onChange={(e) => {
             setphibartop(parseInt(e.target.value));
           }}
-          placeholder="enter appropriate value: 30"
-        />
+        >
+          <option value="">Select</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="25">25</option>
+          <option value="28">28</option>
+          <option value="32">32</option>
+          <option value="36">36</option>
+          <option value="40">40</option>
+        </select>
       </label>
       {/* line 15 */}
       <label style={{display: "flex", flexDirection: "row"}}>
