@@ -35,6 +35,9 @@ function App() {
   const [phibartop, setphibartop] = useState(0);
   const [hfcc, sethfcc] = useState(0);
   const [hast2, sethast2] = useState(0);
+  const [Xu, setXu] = useState(0);
+  const [fXu, setfXu] = useState(0);
+  const [mr, setmr] = useState(0);
 
   const [hast, sethast] = useState(0);
   const [hfast, sethfast] = useState(0);
@@ -337,7 +340,8 @@ function App() {
           onClick={() => {
             console.log("clicked");
             reinforcePerPT =
-              ((50 * fck) / fy) * (1 - Math.sqrt(1 - (4.6 * mu) / (fck * b * (edd * edd))));
+              ((50 * fck) / fy) *
+              (1 - Math.sqrt(1 - (4.6 * mu * 1000000) / (fck * b * (edd * edd))));
             sethreinforcePerPT(reinforcePerPT);
 
             astrequired = (reinforcePerPT * b * edd) / 100;
@@ -478,7 +482,7 @@ function App() {
         >
           calculate
         </button>
-        {hstainESC ? <h3>{hstainESC}</h3> : null}
+        {hfsc ? <h3>{hfsc}</h3> : null}
       </label>
 
       {/* {line 45 */}
@@ -502,7 +506,8 @@ function App() {
 
         <button
           onClick={() => {
-            var asc = (mu2 * 1000000) / ((hfsc - hfcc) * (edd - hddash));
+            var asc = (hmu2 * 1000000) / ((hfsc - hfcc) * (edd - hddash));
+
             sethasc(asc);
           }}
         >
@@ -611,13 +616,13 @@ function App() {
 
         <button
           onClick={() => {
-            var temp = noOfbar1 * 3.14 * (diabar1 * diabar1);
+            var temp = (noOfbar1 * 3.14 * (diabar1 * diabar1)) / 4;
             setascprov(temp);
           }}
         >
           calculate
         </button>
-        {hascreq ? <h3>{hascreq}</h3> : null}
+        {ascprov ? <h3>{ascprov}</h3> : null}
       </label>
 
       {/* line 52 */}
@@ -644,7 +649,7 @@ function App() {
 
         <button
           onClick={() => {
-            var temp = noOfbar2 * 3.14 * (diabar2 * diabar2);
+            var temp = (noOfbar2 * 3.14 * (diabar2 * diabar2)) / 4;
             setprovtop2(temp);
           }}
         >
@@ -676,7 +681,7 @@ function App() {
 
         <button
           onClick={() => {
-            var temp = noOfbar3 * 3.14 * (diabar3 * diabar3);
+            var temp = (noOfbar3 * 3.14 * (diabar3 * diabar3)) / 4;
             setprovtop3(temp);
           }}
         >
@@ -708,7 +713,7 @@ function App() {
 
         <button
           onClick={() => {
-            var temp = noOfbar4 * 3.14 * (diabar4 * diabar4);
+            var temp = (noOfbar4 * 3.14 * (diabar4 * diabar4)) / 4;
             setprovtop4(temp);
           }}
         >
@@ -740,7 +745,7 @@ function App() {
 
         <button
           onClick={() => {
-            var temp = noOfbar5 * 3.14 * (diabar5 * diabar5);
+            var temp = (noOfbar5 * 3.14 * (diabar5 * diabar5)) / 4;
             setprovtop5(temp);
           }}
         >
@@ -772,7 +777,7 @@ function App() {
 
         <button
           onClick={() => {
-            var temp = noOfbar6 * 3.14 * (diabar6 * diabar6);
+            var temp = (noOfbar6 * 3.14 * (diabar6 * diabar6)) / 4;
             setprovtop6(temp);
           }}
         >
@@ -795,6 +800,75 @@ function App() {
         </button>
         {astprov ? <h3>{astprov}</h3> : null}
       </label>
+
+      {astprov <= hastlim &&
+      astprov >= hastmin &&
+      astprov >= hastrequired &&
+      astprov <= hastmax &&
+      ascprov <= hascmax ? (
+        <h3>O.K.</h3>
+      ) : (
+        <h3>Changeg dia of Bar or no of bar</h3>
+      )}
+      {/* line61 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> Calculate XU</h3>
+
+        <button
+          onClick={() => {
+            var temp =
+              mu < mulim
+                ? (0.87 * fy * astprov) / (0.36 * fck * b)
+                : (0.87 * fy * astprov - ascprov * hfsc) / (0.36 * fck * b);
+
+            setXu(temp);
+          }}
+        >
+          calculate
+        </button>
+        {Xu ? <h3>{Xu}</h3> : null}
+      </label>
+      {/* line62 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> Calculate XU Final</h3>
+
+        <button
+          onClick={() => {
+            var temp = Xu > xumaxd * edd ? xumaxd * edd : Xu;
+
+            setfXu(temp);
+          }}
+        >
+          calculate
+        </button>
+        {fXu ? <h3>{fXu}</h3> : null}
+
+        {Xu <= xumaxd * edd ? <h3>O.K</h3> : <h3>Not O.K</h3>}
+      </label>
+      {/* line63 */}
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h3> CalculateMR</h3>
+
+        <button
+          onClick={() => {
+            var temp =
+              mu < mulim
+                ? (0.87 * fy * astprov * (edd - 0.42 * fXu)) / 1000000
+                : (0.36 * fck * b * fXu * (edd - 0.42 * fXu) +
+                    ascprov * (hfsc - hfcc) * (edd - hddash)) /
+                  1000000;
+
+            setmr(temp);
+          }}
+        >
+          calculate
+        </button>
+        {mr ? <h3>{mr}</h3> : null}
+      </label>
+
+      {/* line 64 */}
+
+      {mr > mu ? <h3>Ok design is safe</h3> : <h3>not OK design is not safe</h3>}
     </div>
   );
 }
