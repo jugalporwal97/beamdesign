@@ -198,11 +198,12 @@ function App() {
           onClick={() => {
             varxu = 0.0035 / (0.0055 + (0.87 * fy) / es);
 
-            setxumaxd(parseFloat(varxu.toFixed(2)));
+            setxumaxd(parseFloat(varxu));
           }}
         >
           Calculate
         </button>
+        {xumaxd ? <h4>Result: {xumaxd}</h4> : <h4>enter all the values</h4>}
       </label>
       {/* line 11 */}
 
@@ -211,11 +212,12 @@ function App() {
         <button
           onClick={() => {
             varqlim = 0.36 * xumaxd * [1 - 0.42 * xumaxd] * fck;
-            setqlim(parseFloat(varqlim.toFixed(2)));
+            setqlim(parseFloat(varqlim));
           }}
         >
           Calculate
         </button>
+        {qlim ? <h4>Result: {qlim}</h4> : <h4>enter all the values</h4>}
       </label>
 
       {/* line 12 */}
@@ -224,7 +226,7 @@ function App() {
         <button
           onClick={() => {
             varedd = Math.sqrt((mu * 1000000) / (qlim * b));
-            setdreq(parseFloat(varedd.toFixed(2)));
+            setdreq(parseFloat(varedd));
           }}
         >
           Calculate
@@ -320,11 +322,12 @@ function App() {
               ? (vardreq = doverall - bb - phibar / 2)
               : (vardreq = doverall - bb - phibar / 2 - phibar);
 
-            setedd(parseFloat(vardreq.toFixed(2)));
+            setedd(parseFloat(vardreq));
           }}
         >
           Calculate
         </button>
+        {edd ? <h4>Result: {edd}</h4> : <h4>enter all the values</h4>}
       </label>
 
       {/* line 17 */}
@@ -338,11 +341,12 @@ function App() {
         <button
           onClick={() => {
             varmulim = (qlim * b * (edd * edd)) / 1000000;
-            setMulim(parseFloat(varmulim.toFixed(2)));
+            setMulim(parseFloat(varmulim));
           }}
         >
           Calculate
         </button>
+        {mulim ? <h4>Result: {mulim}</h4> : <h4>enter all the values</h4>}
       </label>
       {/* line 19 */}
 
@@ -352,7 +356,8 @@ function App() {
         <h1>Design as Doubly reinforced rectangular section </h1>
       )}
 
-      <label style={{display: "flex", flexDirection: "column"}}>
+      <label style={{display: "flex", flexDirection: "row"}}>
+        <h4>Reinforcement % PT Required</h4>
         <button
           onClick={() => {
             console.log("clicked");
@@ -383,16 +388,17 @@ function App() {
 
       <label style={{display: "flex", flexDirection: "column"}}>
         <label style={{display: "flex", flexDirection: "row"}}>
-          <h3>MU greater than MU,Lim Calculate MU2</h3>
+          <h3>Calculate MU2</h3>
 
           <button
             onClick={() => {
               mu2 = mu - mulim;
-              sethmu2(parseFloat(mu2.toFixed(2)));
+              sethmu2(parseFloat(mu2));
             }}
           >
             calculate
           </button>
+          {hmu2 ? <h4>Result: {hmu2}</h4> : <h4>enter all the values</h4>}
         </label>
 
         <label style={{display: "flex", flexDirection: "row"}}>
@@ -401,11 +407,12 @@ function App() {
           <button
             onClick={() => {
               ddash = layert === 1 ? bt + phibartop / 2 : bt + phibartop + phibartop / 2;
-              setddash(parseFloat(ddash.toFixed(2)));
+              setddash(parseFloat(ddash));
             }}
           >
             calculate
           </button>
+          {hddash ? <h4>Result: {hddash}</h4> : <h4>enter all the values</h4>}
         </label>
 
         <label style={{display: "flex", flexDirection: "row"}}>
@@ -414,11 +421,13 @@ function App() {
           <button
             onClick={() => {
               stainESC = 0.0035 * (1 - hddash / edd / xumaxd);
-              setstainEsc(parseFloat(stainESC.toFixed(2)));
+              console.log("stainESC", stainESC);
+              setstainEsc(stainESC);
             }}
           >
             calculate
           </button>
+          {hstainESC ? <h4>Result: {hstainESC}</h4> : <h4>enter all the values</h4>}
         </label>
       </label>
 
@@ -466,11 +475,12 @@ function App() {
                 ? fsc16
                 : fsc17;
 
-            setfsc(parseFloat(fsctemp.toFixed(2)));
+            setfsc(parseFloat(fsctemp));
           }}
         >
           calculate
         </button>
+        {hfsc ? <h4>Result: {hfsc}</h4> : <h4>enter all the values</h4>}
       </label>
 
       {/* line44 */}
@@ -486,6 +496,7 @@ function App() {
         >
           calculate
         </button>
+        {hfsc ? <h4>Result: {hfsc}</h4> : <h4>enter all the values</h4>}
       </label>
 
       {/* {line 45 */}
@@ -495,11 +506,12 @@ function App() {
         <button
           onClick={() => {
             var fcc = hddash < (3 * xumaxd * edd) / 7 ? 0.446 * fck : 0;
-            sethfcc(parseFloat(fcc.toFixed(2)));
+            sethfcc(parseFloat(fcc));
           }}
         >
           calculate
         </button>
+        {hfcc ? <h4>Result: {hfcc}</h4> : <h4>enter all the values</h4>}
       </label>
       {/* line 46 */}
 
@@ -510,11 +522,12 @@ function App() {
           onClick={() => {
             var asc = (hmu2 * 1000000) / ((hfsc - hfcc) * (edd - hddash));
 
-            sethasc(parseFloat(asc.toFixed(2)));
+            sethasc(parseFloat(asc));
           }}
         >
           calculate
         </button>
+        {hasc ? <h4>Result: {hasc}</h4> : <h4>enter all the values</h4>}
       </label>
       {/* line 47 */}
 
@@ -524,11 +537,12 @@ function App() {
         <button
           onClick={() => {
             var temp = (hasc * (hfsc - hfcc)) / (0.87 * fy);
-            sethast2(parseFloat(temp.toFixed(2)));
+            sethast2(parseFloat(temp));
           }}
         >
           calculate
         </button>
+        {hast2 ? <h4>Result: {hast2}</h4> : <h4>enter all the values</h4>}
       </label>
       {/* line 48 */}
 
@@ -538,11 +552,12 @@ function App() {
         <button
           onClick={() => {
             var temp = (mulim * 1000000) / (0.87 * fy * (edd - 0.42 * xumaxd * edd));
-            sethastlim(parseFloat(temp.toFixed(2)));
+            sethastlim(parseFloat(temp));
           }}
         >
           calculate
         </button>
+        {hastlim ? <h4>Result: {hastlim}</h4> : <h4>enter all the values</h4>}
       </label>
       {/* line 49 */}
 
@@ -557,6 +572,7 @@ function App() {
         >
           calculate
         </button>
+        {hast ? <h4>Result: {hast}</h4> : <h4>enter all the values</h4>}
       </label>
       {/* line 50 */}
 
@@ -631,11 +647,12 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar1 * 3.14 * (diabar1 * diabar1)) / 4;
-            setascprov(parseFloat(temp.toFixed(2)));
+            setascprov(parseFloat(temp));
           }}
         >
           calculate
         </button>
+        {ascprov ? <h4>Result: {ascprov}</h4> : <h4>enter all the values</h4>}
       </label>
 
       {/* line 54 */}
@@ -679,11 +696,12 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar2 * 3.14 * (diabar2 * diabar2)) / 4;
-            setprovtop2(parseFloat(temp.toFixed(2)));
+            setprovtop2(parseFloat(temp));
           }}
         >
           calculate
         </button>
+        {provtop2 ? <h4>Result: {provtop2}</h4> : <h4>enter all the values</h4>}
       </label>
 
       <h3>Provide top 2</h3>
@@ -726,11 +744,12 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar3 * 3.14 * (diabar3 * diabar3)) / 4;
-            setprovtop3(parseFloat(temp.toFixed(2)));
+            setprovtop3(parseFloat(temp));
           }}
         >
           calculate
         </button>
+        {provtop3 ? <h4>Result: {provtop3}</h4> : <h4>enter all the values</h4>}
       </label>
 
       <h3>Provide top 3</h3>
@@ -773,11 +792,12 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar4 * 3.14 * (diabar4 * diabar4)) / 4;
-            setprovtop4(parseFloat(temp.toFixed(2)));
+            setprovtop4(parseFloat(temp));
           }}
         >
           calculate
         </button>
+        {provtop4 ? <h4>Result: {provtop4}</h4> : <h4>enter all the values</h4>}
       </label>
 
       <h3>Provide top 4</h3>
@@ -820,11 +840,12 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar5 * 3.14 * (diabar5 * diabar5)) / 4;
-            setprovtop5(parseFloat(temp.toFixed(2)));
+            setprovtop5(parseFloat(temp));
           }}
         >
           calculate
         </button>
+        {provtop5 ? <h4>Result: {provtop5}</h4> : <h4>enter all the values</h4>}
       </label>
 
       <h3>Provide top 5</h3>
@@ -867,11 +888,12 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar6 * 3.14 * (diabar6 * diabar6)) / 4;
-            setprovtop6(parseFloat(temp.toFixed(2)));
+            setprovtop6(parseFloat(temp));
           }}
         >
           calculate
         </button>
+        {provtop6 ? <h4>Result: {provtop6}</h4> : <h4>enter all the values</h4>}
       </label>
 
       <label style={{display: "flex", flexDirection: "row"}}>
@@ -889,11 +911,13 @@ function App() {
         {astprov ? <h3>{astprov}</h3> : null}
       </label>
 
-      {astprov <= hastlim &&
-      astprov >= hastmin &&
-      astprov >= hastrequired &&
-      astprov <= hastmax &&
-      ascprov <= hascmax ? (
+      {astprov <= hastlim && astprov >= hastmin && astprov >= hastrequired && mu < mulim ? (
+        <h3>O.K.</h3>
+      ) : mu > mulim &&
+        astprov >= hastrequired &&
+        ascprov >= hascreq &&
+        astprov <= hastmax &&
+        ascprov <= hascmax ? (
         <h3>O.K.</h3>
       ) : (
         <h3>Changeg dia of Bar or no of bar</h3>
@@ -909,7 +933,7 @@ function App() {
                 ? (0.87 * fy * astprov) / (0.36 * fck * b)
                 : (0.87 * fy * astprov - ascprov * hfsc) / (0.36 * fck * b);
 
-            setXu(parseFloat(temp.toFixed(2)));
+            setXu(parseFloat(temp));
           }}
         >
           calculate
@@ -944,7 +968,7 @@ function App() {
                     ascprov * (hfsc - hfcc) * (edd - hddash)) /
                   1000000;
 
-            setmr(parseFloat(temp.toFixed(2)));
+            setmr(parseFloat(temp));
           }}
         >
           calculate
