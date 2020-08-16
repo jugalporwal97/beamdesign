@@ -101,7 +101,7 @@ function App() {
         <h4>fy = characteristic strength of steel : </h4>
         <select
           onChange={(e) => {
-            setFy(parseInt(e.target.value));
+            setFy(parseFloat(e.target.value));
           }}
         >
           <option value="">Select</option>
@@ -118,7 +118,7 @@ function App() {
         <h4>Fck = characteristic compressive strength of concrete :</h4>
         <select
           onChange={(e) => {
-            setfck(parseInt(e.target.value));
+            setfck(parseFloat(e.target.value));
           }}
         >
           <option value="">Select</option>
@@ -135,7 +135,7 @@ function App() {
 
         <input
           onChange={(e) => {
-            setes(parseInt(e.target.value));
+            setes(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value: 200000"
         />
@@ -147,7 +147,7 @@ function App() {
 
         <input
           onChange={(e) => {
-            setb(parseInt(e.target.value));
+            setb(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value: 230"
         />
@@ -161,7 +161,7 @@ function App() {
 
         <input
           onChange={(e) => {
-            setmu(parseInt(e.target.value));
+            setmu(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value: 100"
         />
@@ -173,7 +173,7 @@ function App() {
 
         <input
           onChange={(e) => {
-            setbb(parseInt(e.target.value));
+            setbb(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value: 30"
         />
@@ -185,7 +185,7 @@ function App() {
 
         <input
           onChange={(e) => {
-            setbt(parseInt(e.target.value));
+            setbt(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value: 30"
         />
@@ -197,13 +197,12 @@ function App() {
         <button
           onClick={() => {
             varxu = 0.0035 / (0.0055 + (0.87 * fy) / es);
-            setxumaxd(varxu);
+
+            setxumaxd(parseFloat(varxu.toFixed(2)));
           }}
         >
           Calculate
         </button>
-
-        {xumaxd ? <h4>Result: {xumaxd}</h4> : <h4>enter all the values</h4>}
       </label>
       {/* line 11 */}
 
@@ -212,13 +211,11 @@ function App() {
         <button
           onClick={() => {
             varqlim = 0.36 * xumaxd * [1 - 0.42 * xumaxd] * fck;
-            setqlim(varqlim);
+            setqlim(parseFloat(varqlim.toFixed(2)));
           }}
         >
           Calculate
         </button>
-
-        {qlim ? <h4>Result: {qlim}</h4> : <h4>enter all the values</h4>}
       </label>
 
       {/* line 12 */}
@@ -227,7 +224,7 @@ function App() {
         <button
           onClick={() => {
             varedd = Math.sqrt((mu * 1000000) / (qlim * b));
-            setdreq(varedd);
+            setdreq(parseFloat(varedd.toFixed(2)));
           }}
         >
           Calculate
@@ -240,7 +237,7 @@ function App() {
         <h4>Enter Layer </h4>
         <input
           onChange={(e) => {
-            setlayerb(parseInt(e.target.value));
+            setlayerb(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value:"
         />
@@ -248,7 +245,7 @@ function App() {
 
         <select
           onChange={(e) => {
-            setphibar(parseInt(e.target.value));
+            setphibar(parseFloat(e.target.value));
           }}
         >
           <option value="">Select</option>
@@ -273,7 +270,7 @@ function App() {
         <h4>Enter Layer : </h4>
         <input
           onChange={(e) => {
-            setlayert(parseInt(e.target.value));
+            setlayert(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value:"
         />
@@ -281,7 +278,7 @@ function App() {
 
         <select
           onChange={(e) => {
-            setphibartop(parseInt(e.target.value));
+            setphibartop(parseFloat(e.target.value));
           }}
         >
           <option value="">Select</option>
@@ -307,7 +304,7 @@ function App() {
 
         <input
           onChange={(e) => {
-            setdoverall(parseInt(e.target.value));
+            setdoverall(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value: 450"
         />
@@ -323,24 +320,16 @@ function App() {
               ? (vardreq = doverall - bb - phibar / 2)
               : (vardreq = doverall - bb - phibar / 2 - phibar);
 
-            setedd(vardreq);
+            setedd(parseFloat(vardreq.toFixed(2)));
           }}
         >
           Calculate
         </button>
-
-        {edd ? <h4>Result: {edd}</h4> : <h4>enter all the values</h4>}
       </label>
 
       {/* line 17 */}
 
-      {edd ? (
-        edd >= dreq ? (
-          <h1> Effective depth d {">"}= d req O,K</h1>
-        ) : (
-          <h1>Change D Overall</h1>
-        )
-      ) : null}
+      {edd ? edd >= dreq ? <h1> O.K</h1> : <h1>Change D Overall</h1> : null}
 
       {/* line 18 */}
 
@@ -349,13 +338,11 @@ function App() {
         <button
           onClick={() => {
             varmulim = (qlim * b * (edd * edd)) / 1000000;
-            setMulim(varmulim);
+            setMulim(parseFloat(varmulim.toFixed(2)));
           }}
         >
           Calculate
         </button>
-
-        {mulim ? <h4>Result: {mulim}</h4> : <h4>enter all the values</h4>}
       </label>
       {/* line 19 */}
 
@@ -366,43 +353,32 @@ function App() {
       )}
 
       <label style={{display: "flex", flexDirection: "column"}}>
-        <h3>MU less than MU,Lim</h3>
-
         <button
           onClick={() => {
             console.log("clicked");
             reinforcePerPT =
               ((50 * fck) / fy) *
               (1 - Math.sqrt(1 - (4.6 * mu * 1000000) / (fck * b * (edd * edd))));
-            sethreinforcePerPT(reinforcePerPT);
+            sethreinforcePerPT(parseFloat(reinforcePerPT.toFixed(2)));
 
             astrequired = (reinforcePerPT * b * edd) / 100;
-            sethastrequired(astrequired);
+            sethastrequired(parseFloat(astrequired.toFixed(2)));
             ptlim = ((50 * fck) / fy) * (1 - Math.sqrt(1 - 4.6 * (qlim / fck)));
-            sethptlim(ptlim);
+            sethptlim(parseFloat(ptlim.toFixed(2)));
             astlim = (ptlim * b * edd) / 100;
-            sethastlim(astlim);
+            sethastlim(parseFloat(astlim.toFixed(2)));
             ptmin = 85 / fy;
-            sethptmin(ptmin);
+            sethptmin(parseFloat(ptmin.toFixed(2)));
             astmin = (ptmin * b * edd) / 100;
-            sethastmin(astmin);
+            sethastmin(parseFloat(astmin.toFixed(2)));
             astmax = (4 * b * edd) / 100;
-            sethastmax(astmax);
+            sethastmax(parseFloat(astmax.toFixed(2)));
             ascmax = (4 * b * edd) / 100;
-            sethascmax(astmax);
+            sethascmax(parseFloat(astmax.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {hreinforcePerPT ? <h3>Reinforcement percentage PT required = {hreinforcePerPT}</h3> : null}
-        {hastrequired ? <h3>Ast required = {hastrequired}</h3> : null}
-        {hptlim ? <h3>Pt lim = {hptlim}</h3> : null}
-        {hastlim ? <h3>Ast lim = {hastlim}</h3> : null}
-        {hptmin ? <h3>Pt min = {hptmin}</h3> : null}
-        {hastmin ? <h3>Ast min = {hastmin}</h3> : null}
-        {hastmax ? <h3>Ast max = {hastmax}</h3> : null}
-        {hascmax ? <h3>Asc max = {hastmax}</h3> : null}
-        <h3>Asc = {hasc}</h3>
       </label>
 
       <label style={{display: "flex", flexDirection: "column"}}>
@@ -412,12 +388,11 @@ function App() {
           <button
             onClick={() => {
               mu2 = mu - mulim;
-              sethmu2(mu2);
+              sethmu2(parseFloat(mu2.toFixed(2)));
             }}
           >
             calculate
           </button>
-          {hmu2 ? <h3>{hmu2}</h3> : null}
         </label>
 
         <label style={{display: "flex", flexDirection: "row"}}>
@@ -426,12 +401,11 @@ function App() {
           <button
             onClick={() => {
               ddash = layert === 1 ? bt + phibartop / 2 : bt + phibartop + phibartop / 2;
-              setddash(ddash);
+              setddash(parseFloat(ddash.toFixed(2)));
             }}
           >
             calculate
           </button>
-          {hddash ? <h3>{hddash}</h3> : null}
         </label>
 
         <label style={{display: "flex", flexDirection: "row"}}>
@@ -440,12 +414,11 @@ function App() {
           <button
             onClick={() => {
               stainESC = 0.0035 * (1 - hddash / edd / xumaxd);
-              setstainEsc(stainESC);
+              setstainEsc(parseFloat(stainESC.toFixed(2)));
             }}
           >
             calculate
           </button>
-          {hstainESC ? <h3>{hstainESC}</h3> : null}
         </label>
       </label>
 
@@ -493,12 +466,11 @@ function App() {
                 ? fsc16
                 : fsc17;
 
-            setfsc(fsctemp);
+            setfsc(parseFloat(fsctemp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {hfsc ? <h3>{hfsc}</h3> : null}
       </label>
 
       {/* line44 */}
@@ -514,7 +486,6 @@ function App() {
         >
           calculate
         </button>
-        {hfsc ? <h3>{hfsc}</h3> : null}
       </label>
 
       {/* {line 45 */}
@@ -524,12 +495,11 @@ function App() {
         <button
           onClick={() => {
             var fcc = hddash < (3 * xumaxd * edd) / 7 ? 0.446 * fck : 0;
-            sethfcc(fcc);
+            sethfcc(parseFloat(fcc.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {hfcc ? <h3>{hfcc}</h3> : null}
       </label>
       {/* line 46 */}
 
@@ -540,12 +510,11 @@ function App() {
           onClick={() => {
             var asc = (hmu2 * 1000000) / ((hfsc - hfcc) * (edd - hddash));
 
-            sethasc(asc);
+            sethasc(parseFloat(asc.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {hasc ? <h3>{hasc}</h3> : null}
       </label>
       {/* line 47 */}
 
@@ -555,12 +524,11 @@ function App() {
         <button
           onClick={() => {
             var temp = (hasc * (hfsc - hfcc)) / (0.87 * fy);
-            sethast2(temp);
+            sethast2(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {hast2 ? <h3>{hast2}</h3> : null}
       </label>
       {/* line 48 */}
 
@@ -570,12 +538,11 @@ function App() {
         <button
           onClick={() => {
             var temp = (mulim * 1000000) / (0.87 * fy * (edd - 0.42 * xumaxd * edd));
-            sethastlim(temp);
+            sethastlim(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {hastlim ? <h3>{hastlim}</h3> : null}
       </label>
       {/* line 49 */}
 
@@ -590,12 +557,11 @@ function App() {
         >
           calculate
         </button>
-        {hast ? <h3>{hast}</h3> : null}
       </label>
       {/* line 50 */}
 
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h3>Fial Ast required : </h3>
+        <h3>Final Ast required : </h3>
 
         <button
           onClick={() => {
@@ -621,59 +587,90 @@ function App() {
         >
           calculate
         </button>
-        {hascreq ? <h3>{hascreq}</h3> : null}
+        <h3>{hascreq}</h3>
       </label>
 
       {/* line 52 */}
       <h3>Provide Bottom</h3>
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h4>Dia of bar</h4>
-        <input
-          onChange={(e) => {
-            setdiabar1(parseInt(e.target.value));
-          }}
-          placeholder="enter appropriate value:"
-        />
         <h4>number of bar</h4>
         <input
           onChange={(e) => {
-            setnoOfbar1(parseInt(e.target.value));
+            setnoOfbar1(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value:"
         />
+
+        <h4>Dia of bar</h4>
+        <select
+          onChange={(e) => {
+            setdiabar1(parseFloat(e.target.value));
+          }}
+        >
+          <option value="">Select</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="25">25</option>
+          <option value="28">28</option>
+          <option value="32">32</option>
+          <option value="36">36</option>
+          <option value="40">40</option>
+        </select>
       </label>
       {/* line 53 */}
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h3> Asc required : </h3>
+        <h3> Asc Provided : </h3>
 
         <button
           onClick={() => {
             var temp = (noOfbar1 * 3.14 * (diabar1 * diabar1)) / 4;
-            setascprov(temp);
+            setascprov(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {ascprov ? <h3>{ascprov}</h3> : null}
       </label>
 
-      {/* line 52 */}
+      {/* line 54 */}
       <h3>Provide top 1</h3>
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h4>Dia of bar</h4>
-        <input
-          onChange={(e) => {
-            setdiabar2(parseInt(e.target.value));
-          }}
-          placeholder="enter appropriate value:"
-        />
         <h4>number of bar</h4>
         <input
           onChange={(e) => {
-            setnoOfbar2(parseInt(e.target.value));
+            setnoOfbar2(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value:"
         />
+
+        <h4>Dia of bar</h4>
+        <select
+          onChange={(e) => {
+            setdiabar2(parseFloat(e.target.value));
+          }}
+        >
+          <option value="">Select</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="25">25</option>
+          <option value="28">28</option>
+          <option value="32">32</option>
+          <option value="36">36</option>
+          <option value="40">40</option>
+        </select>
       </label>
       {/* line 53 */}
       <label style={{display: "flex", flexDirection: "row"}}>
@@ -682,30 +679,45 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar2 * 3.14 * (diabar2 * diabar2)) / 4;
-            setprovtop2(temp);
+            setprovtop2(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {provtop2 ? <h3>{provtop2}</h3> : null}
       </label>
 
       <h3>Provide top 2</h3>
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h4>Dia of bar</h4>
-        <input
-          onChange={(e) => {
-            setdiabar3(parseInt(e.target.value));
-          }}
-          placeholder="enter appropriate value:"
-        />
         <h4>number of bar</h4>
         <input
           onChange={(e) => {
-            setnoOfbar3(parseInt(e.target.value));
+            setnoOfbar3(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value:"
         />
+
+        <h4>Dia of bar</h4>
+        <select
+          onChange={(e) => {
+            setdiabar3(parseFloat(e.target.value));
+          }}
+        >
+          <option value="">Select</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="25">25</option>
+          <option value="28">28</option>
+          <option value="32">32</option>
+          <option value="36">36</option>
+          <option value="40">40</option>
+        </select>
       </label>
       {/* line 53 */}
       <label style={{display: "flex", flexDirection: "row"}}>
@@ -714,30 +726,45 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar3 * 3.14 * (diabar3 * diabar3)) / 4;
-            setprovtop3(temp);
+            setprovtop3(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {provtop3 ? <h3>{provtop3}</h3> : null}
       </label>
 
       <h3>Provide top 3</h3>
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h4>Dia of bar</h4>
-        <input
-          onChange={(e) => {
-            setdiabar4(parseInt(e.target.value));
-          }}
-          placeholder="enter appropriate value:"
-        />
         <h4>number of bar</h4>
         <input
           onChange={(e) => {
-            setnoOfbar4(parseInt(e.target.value));
+            setnoOfbar4(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value:"
         />
+
+        <h4>Dia of bar</h4>
+        <select
+          onChange={(e) => {
+            setdiabar4(parseFloat(e.target.value));
+          }}
+        >
+          <option value="">Select</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="25">25</option>
+          <option value="28">28</option>
+          <option value="32">32</option>
+          <option value="36">36</option>
+          <option value="40">40</option>
+        </select>
       </label>
       {/* line 53 */}
       <label style={{display: "flex", flexDirection: "row"}}>
@@ -746,30 +773,45 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar4 * 3.14 * (diabar4 * diabar4)) / 4;
-            setprovtop4(temp);
+            setprovtop4(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {provtop4 ? <h3>{provtop4}</h3> : null}
       </label>
 
       <h3>Provide top 4</h3>
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h4>Dia of bar</h4>
-        <input
-          onChange={(e) => {
-            setdiabar5(parseInt(e.target.value));
-          }}
-          placeholder="enter appropriate value:"
-        />
         <h4>number of bar</h4>
         <input
           onChange={(e) => {
-            setnoOfbar5(parseInt(e.target.value));
+            setnoOfbar5(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value:"
         />
+
+        <h4>Dia of bar</h4>
+        <select
+          onChange={(e) => {
+            setdiabar5(parseFloat(e.target.value));
+          }}
+        >
+          <option value="">Select</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="25">25</option>
+          <option value="28">28</option>
+          <option value="32">32</option>
+          <option value="36">36</option>
+          <option value="40">40</option>
+        </select>
       </label>
       {/* line 53 */}
       <label style={{display: "flex", flexDirection: "row"}}>
@@ -778,30 +820,45 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar5 * 3.14 * (diabar5 * diabar5)) / 4;
-            setprovtop5(temp);
+            setprovtop5(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {provtop5 ? <h3>{provtop5}</h3> : null}
       </label>
 
       <h3>Provide top 5</h3>
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h4>Dia of bar</h4>
-        <input
-          onChange={(e) => {
-            setdiabar6(parseInt(e.target.value));
-          }}
-          placeholder="enter appropriate value:"
-        />
         <h4>number of bar</h4>
         <input
           onChange={(e) => {
-            setnoOfbar6(parseInt(e.target.value));
+            setnoOfbar6(parseFloat(e.target.value));
           }}
           placeholder="enter appropriate value:"
         />
+
+        <h4>Dia of bar</h4>
+        <select
+          onChange={(e) => {
+            setdiabar6(parseFloat(e.target.value));
+          }}
+        >
+          <option value="">Select</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="25">25</option>
+          <option value="28">28</option>
+          <option value="32">32</option>
+          <option value="36">36</option>
+          <option value="40">40</option>
+        </select>
       </label>
       {/* line 53 */}
       <label style={{display: "flex", flexDirection: "row"}}>
@@ -810,16 +867,15 @@ function App() {
         <button
           onClick={() => {
             var temp = (noOfbar6 * 3.14 * (diabar6 * diabar6)) / 4;
-            setprovtop6(temp);
+            setprovtop6(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {provtop6 ? <h3>{provtop6}</h3> : null}
       </label>
 
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h3> Calculate Act Provided </h3>
+        <h3> Ast Provided </h3>
 
         <button
           onClick={() => {
@@ -853,12 +909,11 @@ function App() {
                 ? (0.87 * fy * astprov) / (0.36 * fck * b)
                 : (0.87 * fy * astprov - ascprov * hfsc) / (0.36 * fck * b);
 
-            setXu(temp);
+            setXu(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {Xu ? <h3>{Xu}</h3> : null}
       </label>
       {/* line62 */}
       <label style={{display: "flex", flexDirection: "row"}}>
@@ -873,7 +928,6 @@ function App() {
         >
           calculate
         </button>
-        {fXu ? <h3>{fXu}</h3> : null}
 
         {Xu <= xumaxd * edd ? <h3>O.K</h3> : <h3>Not O.K</h3>}
       </label>
@@ -890,17 +944,17 @@ function App() {
                     ascprov * (hfsc - hfcc) * (edd - hddash)) /
                   1000000;
 
-            setmr(temp);
+            setmr(parseFloat(temp.toFixed(2)));
           }}
         >
           calculate
         </button>
-        {mr ? <h3>{mr}</h3> : null}
       </label>
 
       {/* line 64 */}
 
       {mr > mu ? <h3>Ok design is safe</h3> : <h3>not OK design is not safe</h3>}
+      <button onClick={() => window.print()}>Print this page</button>
     </div>
   );
 }

@@ -2,7 +2,8 @@
   margin-left: 15%;
 }
 input {
-  width: 250px;
+  width: auto;
+  height: auto;
   padding: 12px 20px;
   margin: 10px 10px;
   display: inline-block;
@@ -13,12 +14,12 @@ input {
 select {
   height: 33px;
   margin: 17px;
-  border-radius: 10%;
+
   width: 15%;
 }
 button {
-  width: 15%;
-
+  width: auto;
+  max-width: 15%;
   background-color: #4caf50;
   color: white;
   padding: 10px;
