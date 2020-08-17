@@ -356,7 +356,7 @@ function App() {
         <h1>Design as Doubly reinforced rectangular section </h1>
       )}
 
-      <label style={{display: "flex", flexDirection: "row"}}>
+      <label style={{display: "flex", flexDirection: "column"}}>
         <h4>Reinforcement % PT Required</h4>
         <button
           onClick={() => {
@@ -962,7 +962,9 @@ function App() {
         >
           calculate
         </button>
-        {fXu ? <h3>{fXu}</h3> : null}
+        {fXu ? <h3>{fXu} </h3> : null}
+        <br></br>
+
         {Xu <= xumaxd * edd ? <h3>O.K</h3> : <h3>Not O.K</h3>}
       </label>
       {/* line63 */}
