@@ -384,6 +384,15 @@ function App() {
         >
           calculate
         </button>
+        {hreinforcePerPT ? <h3>Reinforcement percentage PT required = {hreinforcePerPT}</h3> : null}
+        {hastrequired ? <h3>Ast required = {hastrequired}</h3> : null}
+        {hptlim ? <h3>Pt lim = {hptlim}</h3> : null}
+        {hastlim ? <h3>Ast lim = {hastlim}</h3> : null}
+        {hptmin ? <h3>Pt min = {hptmin}</h3> : null}
+        {hastmin ? <h3>Ast min = {hastmin}</h3> : null}
+        {hastmax ? <h3>Ast max = {hastmax}</h3> : null}
+        {hascmax ? <h3>Asc max = {hastmax}</h3> : null}
+        <h3>Asc = {hasc}</h3>
       </label>
 
       <label style={{display: "flex", flexDirection: "column"}}>
@@ -938,6 +947,7 @@ function App() {
         >
           calculate
         </button>
+        {Xu ? <h3>{Xu}</h3> : null}
       </label>
       {/* line62 */}
       <label style={{display: "flex", flexDirection: "row"}}>
@@ -952,7 +962,7 @@ function App() {
         >
           calculate
         </button>
-
+        {fXu ? <h3>{fXu}</h3> : null}
         {Xu <= xumaxd * edd ? <h3>O.K</h3> : <h3>Not O.K</h3>}
       </label>
       {/* line63 */}
@@ -973,6 +983,7 @@ function App() {
         >
           calculate
         </button>
+        {mr ? <h3>{mr}</h3> : null}
       </label>
 
       {/* line 64 */}
