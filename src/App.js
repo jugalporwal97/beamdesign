@@ -236,7 +236,7 @@ function App() {
       </label>
       {/* line13 */}
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h4>Enter Layer </h4>
+        <h4>Assume Layer </h4>
         <input
           onChange={(e) => {
             setlayerb(parseFloat(e.target.value));
@@ -269,7 +269,7 @@ function App() {
       </label>
       {/* line 14 */}
       <label style={{display: "flex", flexDirection: "row"}}>
-        <h4>Enter Layer : </h4>
+        <h4>Assume Layer : </h4>
         <input
           onChange={(e) => {
             setlayert(parseFloat(e.target.value));
